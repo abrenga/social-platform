@@ -1,0 +1,58 @@
+
+*************************Milestone 3***********************************
+
+1./*Seleziona gli utenti che hanno postato almento un video*/
+
+select u.username 
+from users u 
+join medias m on m.user_id =u.id
+where m.`type` like '%video'
+group by u.username;
+
+
+2. /*Seleziona tutti i post senza like(13)*/
+
+select *
+from posts p 
+left join likes l on l.post_id =p.id
+where l.post_id is null;
+
+
+
+
+
+
+
+3. /*Conta il numero di Like per ogni post(165)*/***Ricontrolla questa ci sono dei post fantasma***
+
+select  l.post_id , count( l.user_id) 
+from likes l  
+join posts p on p.id =l.post_id 
+join users u on u.id =p.user_id 
+group by l.post_id;
+
+
+
+
+
+
+
+4. Ordina gli utenti per il numero di media caricati(25)***
+
+select s.username,count(mp2.media_id)
+from users s
+join posts p on p.user_id =s.id 
+join media_post mp2  on mp2.post_id =p.id 
+group by s.username;
+
+
+
+/*5.Ordina gli utenti per totale di likes ricevuti nei loro posts(25)*/
+
+
+select s.username,count(l.post_id)
+from users s
+join posts p on p.user_id =s.id 
+join likes l  on l.post_id=p.id 
+group by s.username;
+
