@@ -26,11 +26,10 @@ where l.post_id is null;
 
 3. /*Conta il numero di Like per ogni post(165)*/
 
-
-select l.post_id, count(l.post_id) 
-from likes l 
-join posts p on p.id =l.post_id 
-group by l.post_id;
+select  p.id , count(l.post_id) 
+from posts p
+left join likes l on l.post_id =p.id
+group by p.id ;
 
 
 
